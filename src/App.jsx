@@ -1,7 +1,9 @@
+import AppRouter from "./routes/AppRouter"
+
 function App() {
   return (
     <>
-      <div className="text-4xl">Codecap20 Fakebook</div>
+      <AppRouter />
     </>
   )
 }
