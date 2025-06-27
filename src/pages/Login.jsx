@@ -1,12 +1,26 @@
 import { useState } from "react"
 import { FakebookTitle } from "../icons/index"
 import Register from "./Register"
+import { loginSchema } from "../utils/validator";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 function Login() {
   const [resetForm, setResetForm] = useState(false)
+  const { handleSubmit, register, formState: {errors, isSubmitting}, reset } = useForm({
+      resolver: yupResolver(loginSchema),
+    });
+
+
   const hdlClose = () => {
+    console.log('dialog close...')
     setResetForm(prv=>!prv)
   }
+
+  const hdlLogin = async data => {
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    alert(JSON.stringify(data,null,2))
+  } 
 
   return (
     <>
@@ -20,24 +34,33 @@ function Login() {
           </div>
           <div className="bg-white flex-1">
             <div className="card bg-base-100 w-full h-[350px] shadow-xl mt-8">
-              <form>
+              <form onSubmit={handleSubmit(hdlLogin)}>
+                <fieldset disabled={isSubmitting}>
                 <div className="card-body">
                   <input type='text'
                     className="input w-full"
                     placeholder="E-mail or Phone number"
+                    {...register('identity')}
                   />
-
+                  {errors.identity && <p className="text-sm text-error">{errors.identity?.message}</p>}
                   <input type='password'
                     className="input w-full"
                     placeholder="password"
+                     {...register('password')}
                   />
-                  <button className="btn btn-primary text-xl">Login</button>
+                  {errors.identity && <p className="text-sm text-error">{errors.password?.message}</p>}
+
+                  {!isSubmitting && <button className="btn btn-primary text-xl">Login</button>}
+                  {isSubmitting && <button className="btn btn-primary text-xl">Login 
+                    <span className="loading loading-spinner loading-xs"></span>
+                    </button>}
                   <p className="text-center cursor-pointer opacity-70">Forgotten password</p>
                   <div className="divider my-0"></div>
                   <button type="button" className="btn btn-secondary text-lg"
                   onClick={()=>document.getElementById("register-form").showModal()}
                   >Create new account</button>
                 </div>
+                </fieldset>
               </form>
             </div>
           </div>
