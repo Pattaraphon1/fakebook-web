@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 function Register({ resetForm }) {
   const { handleSubmit, register, formState, reset } = useForm({
     resolver: yupResolver(registerSchema),
+    mode: 'onBlur'
   });
   const { isSubmitting, errors } = formState;
 
