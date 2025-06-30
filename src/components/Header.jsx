@@ -52,7 +52,7 @@ function Header() {
             />
           </div>
           <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-            <li><a><Link to='/profile'>Profile</Link></a></li>
+            <li><Link to='/profile'>Profile</Link></li>
             <li><a onClick={logout}>Logout</a></li>
           </ul>
         </div>

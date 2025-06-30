@@ -13,7 +13,7 @@ const Friends =  lazy(()=> import('../pages/Friends'))
 const Profile =  lazy(()=> import('../pages/Profile'))
 
 const guestRouter = createBrowserRouter([
-  { path: '/', element: <p><Login /></p> },
+  { path: '/', element: <Login />},
   { path: '/ads', element: <p>Advertising</p> },
   { path: '*', element: <Navigate to='/' replace /> },
 ])
@@ -22,9 +22,9 @@ const userRouter = createBrowserRouter([
   {
     path: '/', element: <UserLayout />,
     children: [
-      { index: true, element: <p><Home /></p> },
-      { path: 'friends', element: <p><Friends /></p> },
-      { path: 'profile', element: <p><Profile /></p> },
+      { index: true, element: <Home /> },
+      { path: 'friends', element: <Friends /> },
+      { path: 'profile', element: <Profile /> },
       { path: '*', element: <Navigate to='/' /> },
 
     ]
